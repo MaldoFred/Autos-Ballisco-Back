@@ -52,4 +52,45 @@ router.post('/get-list-autos', (req,res) => {
         .catch((err) => res.json({message: err}));
 });
 
+//Delete completo de un auto en especifico por ID
+router.delete('/delete-auto/:id', (req, res) => {
+    console.log("Request de deleteAutoById: ", req.params);
+    const { id } = req.params;
+    
+    carSchema
+        .findByIdAndDelete(id).then((car) => {
+            if (!car) {
+                return res.status(404).send();
+            }
+            res.send(car);
+        }).catch((error) => {
+            res.status(500).send(error);
+        }) 
+    
+});
+
+router.post('/update-auto', (req, res) => {
+    console.log("Este es el request para editar autos: ",req.body);
+    let body = req.body;
+    carSchema.findOneAndUpdate({ _id: body.id }, {
+            $set: req.body
+        },
+        
+        function(error, info) {
+            if (error) {
+                res.json({
+                    resultado: false,
+                    msg: 'No se pudo modificar el cliente',
+                    err
+                });
+            } else {
+                res.json({
+                    resultado: true,
+                    info: info
+                })
+            }
+        }
+    )
+});
+
 module.exports = router;
