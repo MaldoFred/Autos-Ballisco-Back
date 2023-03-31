@@ -60,7 +60,11 @@ required: true
     disponible: {
         type: Boolean,
         required: true
-    }   
+    },  
+    imagen:{
+        type: String,
+        required: false
+    }
 });
 
 module.exports = mongoose.model('Car', carSchema)

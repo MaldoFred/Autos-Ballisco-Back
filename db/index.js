@@ -6,8 +6,7 @@ const mongoose = require("mongoose");
 // If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
 
 const MONGO_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Ballisco";
-
+"mongodb+srv://alfr3domal:oXaoPsUK9pXZWpaK@cluster0.wjkelfn.mongodb.net/Ballisco?retryWrites=true&w=majority";
 mongoose
   .connect(MONGO_URI)
   .then((x) => {
@@ -17,3 +16,16 @@ mongoose
   .catch((err) => {
     console.error("Error connecting to mongo: ", err);
   });
+
+  /*const MONGO_URI =
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Ballisco";
+  
+  mongoose
+  .connect(MONGO_URI)
+  .then((x) => {
+    const dbName = x.connections[0].name;
+    console.log(`Connected to Mongo! Database name: "${dbName}"`);
+  })
+  .catch((err) => {
+    console.error("Error connecting to mongo: ", err);
+  });*/
